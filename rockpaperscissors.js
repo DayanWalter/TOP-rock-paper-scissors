@@ -6,6 +6,11 @@ function getComputerChoice(){
 // return the random value
     return choice[random];
 }
+
 // present the choice
-getComputerChoice();
-console.log(getComputerChoice());
+const computerSelection = getComputerChoice();
+//the player chooses 1 of 3 options
+const playerSelection = "rock";
+
+console.log(computerSelection);
+console.log(playerSelection);
