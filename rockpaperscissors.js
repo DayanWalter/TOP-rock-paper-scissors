@@ -13,7 +13,7 @@ console.log(computerSelection);
 
 //the player chooses 1 of 3 options
 // present the choice of the player and write it in a constant
-const playerSelection = "rock";
+const playerSelection = "RoCk";
 console.log(playerSelection);
 
 //computer and player choose
@@ -29,9 +29,9 @@ function playRound(playerSelection, computerSelection){
 // computer choose scissors & player choose scissors
 // then
 // stale
-const stale = ((computerSelection == "Rock") & (playerSelection == "rock") || 
-(computerSelection == "Paper") & (playerSelection == "paper") ||
-(computerSelection == "Scissors") & (playerSelection == "scissors"))
+const stale = ((computerSelection == "Rock") & (playerSelection.toLowerCase() == "rock") || 
+(computerSelection == "Paper") & (playerSelection.toLowerCase() == "paper") ||
+(computerSelection == "Scissors") & (playerSelection.toLowerCase() == "scissors"))
 
 // if
 // computer choose rock & player choose paper
@@ -41,9 +41,9 @@ const stale = ((computerSelection == "Rock") & (playerSelection == "rock") ||
 // computer choose scissors & player choose rock
 // then
 // player won
-const playerWon = (computerSelection == "Rock") & (playerSelection == "paper") || 
-(computerSelection == "Paper") & (playerSelection == "scissors") ||
-(computerSelection == "Scissors") & (playerSelection == "rock")
+const playerWon = (computerSelection == "Rock") & (playerSelection.toLowerCase() == "paper") || 
+(computerSelection == "Paper") & (playerSelection.toLowerCase() == "scissors") ||
+(computerSelection == "Scissors") & (playerSelection.toLowerCase() == "rock")
 
 // if
 // computer choose rock & player choose scissors
@@ -53,9 +53,9 @@ const playerWon = (computerSelection == "Rock") & (playerSelection == "paper") |
 // computer choose scissors & player choose paper
 // then
 // computer won
-const computerWon = (computerSelection == "Rock") & (playerSelection == "scissors") || 
-(computerSelection == "Paper") & (playerSelection == "rock") ||
-(computerSelection == "Scissors") & (playerSelection == "paper")
+const computerWon = (computerSelection == "Rock") & (playerSelection.toLowerCase() == "scissors") || 
+(computerSelection == "Paper") & (playerSelection.toLowerCase() == "rock") ||
+(computerSelection == "Scissors") & (playerSelection.toLowerCase() == "paper")
 
 // If statement checking the constants
 if(stale){
