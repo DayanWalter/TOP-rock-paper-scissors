@@ -74,3 +74,34 @@ playRound(playerSelection, computerSelection);
 
 const endResult = playRound(playerSelection, computerSelection);
 console.log(endResult);
+
+// create a function called game()
+function game(){
+// make a loop for playing 5 rounds of the game
+for (let i = 0; i < 5; i++){
+    if(i==0){
+        console.log("Round 1");
+    }else if(i==1){
+        console.log("Round 2");
+    }else if(i==2){
+        console.log("Round 3");
+    }else if(i==3){
+        console.log("Round 4");
+    }else{
+        console.log("Round 5");
+    }
+    return;
+}
+
+// take playRound() and use it in the loop
+// print the result of every round with console.log
+
+}
+
+console.log(game());
+
+// let answer = parseInt(prompt("Please enter the number you would like to FizzBuzz up to: "));
+
+// for (let i = 1; i <= answer; i++) {
+//   console.log(i);
+// }
