@@ -13,7 +13,7 @@ console.log(computerSelection);
 
 //the player chooses 1 of 3 options
 // present the choice of the player and write it in a constant
-const playerSelection = "RoCk";
+const playerSelection = "rOcK";
 console.log(playerSelection);
 
 //computer and player choose
@@ -29,7 +29,7 @@ function playRound(playerSelection, computerSelection){
 // computer choose scissors & player choose scissors
 // then
 // stale
-const stale = ((computerSelection == "Rock") & (playerSelection.toLowerCase() == "rock") || 
+const draw = ((computerSelection == "Rock") & (playerSelection.toLowerCase() == "rock") || 
 (computerSelection == "Paper") & (playerSelection.toLowerCase() == "paper") ||
 (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "scissors"))
 
@@ -58,8 +58,8 @@ const computerWon = (computerSelection == "Rock") & (playerSelection.toLowerCase
 (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "paper")
 
 // If statement checking the constants
-if(stale){
-    return ("Stale!");
+if(draw){
+    return ("Draw!");
 }else if(playerWon){
     return ("Player won!");
 }else if(computerWon){
@@ -70,38 +70,39 @@ if(stale){
 
 }
 playRound(playerSelection, computerSelection);
-// console.log(playRound(playerSelection, computerSelection));
+console.log(playRound(playerSelection, computerSelection));
 
-const endResult = playRound(playerSelection, computerSelection);
-console.log(endResult);
 
 // create a function called game()
 function game(){
 // make a loop for playing 5 rounds of the game
+// take the result of every round and iterate it in the loop
+
+// define local variables for the loop
+let ifdraw = 0;
+let ifplayerWon = 0;
+let ifcomputerWon = 0;
+
+
 for (let i = 0; i < 5; i++){
-    if(i==0){
-        console.log("Round 1");
-    }else if(i==1){
-        console.log("Round 2");
-    }else if(i==2){
-        console.log("Round 3");
-    }else if(i==3){
-        console.log("Round 4");
-    }else{
-        console.log("Round 5");
+// console.log(i);
+    switch(playRound(playerSelection, computerSelection)){
+        case "Draw!":
+            ifdraw++;
+            break;
+        case "Player won!":
+            ifplayerWon++;
+            break;
+        case "Computer won!":
+            ifcomputerWon++;
+        }
+console.log(ifdraw);
+// console.log(ifplayerWon);
+// console.log(ifcomputerWon);
     }
-    return;
 }
 
-// take playRound() and use it in the loop
-// print the result of every round with console.log
 
-}
 
-console.log(game());
-
-// let answer = parseInt(prompt("Please enter the number you would like to FizzBuzz up to: "));
-
-// for (let i = 1; i <= answer; i++) {
-//   console.log(i);
-// }
+game();
+// console.log(game());
