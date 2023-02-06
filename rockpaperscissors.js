@@ -6,8 +6,8 @@ function getComputerChoice(){
 // return the random value
     return choice[random];
 }
-// present the choice of the computer and write it in a constant
-const computerSelection = getComputerChoice();
+// present the choice of the computer and write it in a constant(not necessary)
+// const computerSelection = getComputerChoice();
 
 //compare both choices with a funcion
 function playRound(playerSelection, computerSelection){
