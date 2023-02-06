@@ -6,17 +6,8 @@ function getComputerChoice(){
 // return the random value
     return choice[random];
 }
-
 // present the choice of the computer and write it in a constant
 const computerSelection = getComputerChoice();
-console.log(computerSelection);
-
-//the player chooses 1 of 3 options
-// present the choice of the player and write it in a constant
-const playerSelection = "rOcK";
-console.log(playerSelection);
-
-//computer and player choose
 
 //compare both choices with a funcion
 function playRound(playerSelection, computerSelection){
@@ -28,7 +19,7 @@ function playRound(playerSelection, computerSelection){
 // or
 // computer choose scissors & player choose scissors
 // then
-// stale
+// draw
 const draw = ((computerSelection == "Rock") & (playerSelection.toLowerCase() == "rock") || 
 (computerSelection == "Paper") & (playerSelection.toLowerCase() == "paper") ||
 (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "scissors"))
@@ -65,44 +56,51 @@ if(draw){
 }else if(computerWon){
     return("Computer won!");
 }else{
-    return ("What happened?!");
+    return ("Just Rock, Paper, Scissors; Nothing Else!");
 }
 
 }
-playRound(playerSelection, computerSelection);
-console.log(playRound(playerSelection, computerSelection));
-
 
 // create a function called game()
-function game(){
-// make a loop for playing 5 rounds of the game
-// take the result of every round and iterate it in the loop
+function game() {
+// define the score basis at the beginning
+    let playerScore = 0;
+    let computerScore = 0;
+// make a loop with 5 iterations/rounds
+    for (let i = 0; i < 5; i++) {
+// define constants
+// define const computerSelection and take the input from the function getComputerChoice()
+      const computerSelection = getComputerChoice();
+// define const playerSelection and take the input from a prompt
+      const playerSelection = prompt("Enter rock, paper, or scissors:");
+// define const result by taking the input from the function playRound(playerSelection, computerSelection)
+      const result = playRound(playerSelection, computerSelection);
+// log the results of each Round
+      console.log(`Round ${i + 1}: ${result}`);
 
-// define local variables for the loop
-let ifdraw = 0;
-let ifplayerWon = 0;
-let ifcomputerWon = 0;
-
-
-for (let i = 0; i < 5; i++){
-// console.log(i);
-    switch(playRound(playerSelection, computerSelection)){
-        case "Draw!":
-            ifdraw++;
-            break;
-        case "Player won!":
-            ifplayerWon++;
-            break;
-        case "Computer won!":
-            ifcomputerWon++;
-        }
-console.log(ifdraw);
-// console.log(ifplayerWon);
-// console.log(ifcomputerWon);
+// add scores via if-function
+// if player won - playerScore++
+      if (result === "Player won!") {
+        playerScore++;
+// if computer won - computerScore++
+      } else if (result === "Computer won!") {
+        computerScore++;
+      }
     }
-}
-
-
-
-game();
-// console.log(game());
+// compare the scores at the end of all 5 Rounds
+// if playerScore is greater than computerscore
+    if (playerScore > computerScore) {
+// log player wins the game with a score of "playerScore" to "computerScore"
+      console.log(`The player wins the game with a score of ${playerScore} to ${computerScore}`);
+// else if computerScore is greater than playerScore
+    } else if (computerScore > playerScore) {
+//log computer wins the game with a score of computerScore to playerScore
+      console.log(`The computer wins the game with a score of ${computerScore} to ${playerScore}`);
+// else draw
+    } else {
+// log game is a draw with a score of playerScore to computerScore
+      console.log(`The game is a draw with a score of ${playerScore} to ${computerScore}`);
+    }
+  }
+// invoke function
+  game();
