@@ -7,38 +7,30 @@ function getComputerChoice(){
     return choice[random];
 }
 // compare choices
-function playRound(playerSelection, computerSelection){
-
-    const draw =(
-            (computerSelection == "Rock") & (playerSelection.toLowerCase() == "rock") || 
-            (computerSelection == "Paper") & (playerSelection.toLowerCase() == "paper") ||
-            (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "scissors")
-                )
-
-    const playerWon = (
-            (computerSelection == "Rock") & (playerSelection.toLowerCase() == "paper") || 
-            (computerSelection == "Paper") & (playerSelection.toLowerCase() == "scissors") ||
-            (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "rock")
-                )
-
-    const computerWon = (
-            (computerSelection == "Rock") & (playerSelection.toLowerCase() == "scissors") || 
-            (computerSelection == "Paper") & (playerSelection.toLowerCase() == "rock") ||
-            (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "paper")
-                )
-
-// checking the choices and returning string
-    if(draw){
-        return ("Draw!");
-    }else if(playerWon){
-        return ("Player won!");
-    }else if(computerWon){
-        return("Computer won!");
-    }else{
-        return ("Just Rock, Paper, Scissors; Nothing Else!");
-    }
-
-}
+function playRound(playerSelection, computerSelection) {
+  const rules = {
+  "rock": {
+  "rock": "Draw!",
+  "paper": "Computer won!",
+  "scissors": "Player won!"
+  },
+  "paper": {
+  "rock": "Player won!",
+  "paper": "Draw!",
+  "scissors": "Computer won!"
+  },
+  "scissors": {
+  "rock": "Computer won!",
+  "paper": "Player won!",
+  "scissors": "Draw!"
+  }
+  };
+  
+  playerSelection = playerSelection.toLowerCase();
+  const result = rules[playerSelection][computerSelection.toLowerCase()];
+  
+  return result ? result : "Just Rock, Paper, Scissors; Nothing Else!";
+  }
 
 // play 5 Rounds
 function game() {
