@@ -5,13 +5,8 @@ function getComputerChoice(){
     const random = Math.floor(Math.random() * choice.length);   
 
     return choice[random];
-}
-const rockButton = document.querySelector("#rock");
-rockButton.addEventListener("click", compareFunction);
 
-function compareFunction(){
-  document.querySelector("#test").textContent="rock";
-};
+}
 // compare choices
 function playRound(playerSelection, computerSelection){
 
@@ -46,20 +41,50 @@ function playRound(playerSelection, computerSelection){
 
 }
 
+function getPlayerChoice(){
+
+}
+
+
 // play 5 Rounds
 function game() {
 // score basis at the beginning
     let playerScore = 0;
     let computerScore = 0;
 
-    for (let i = 0; i < 1; i++) {
+    // for (let i = 0; i < 1; i++) {
 
       const computerSelection = getComputerChoice();
-      const playerSelection = "rock";
+      console.log(getComputerChoice());
       // const playerSelection = prompt("Enter rock, paper, or scissors:");
+      const playerSelection = document.querySelector("#playerSelection");
+
+
+      const rockButton = document.getElementById("rock");
+      const paperButton = document.querySelector("#paper");
+      const scissorsButton = document.querySelector("#scissors");
+    
+    
+      function rockSelection(){
+        return playerSelection.textContent = "rock";
+      };
+    
+      function paperSelection(){
+        return playerSelection.textContent = "paper";
+      };
+    
+      function scissorsSelection(){
+        return playerSelection.textContent = "scissors";
+      };
+    
+    
+      rockButton.addEventListener("click", rockSelection);
+      paperButton.addEventListener("click", paperSelection);
+      scissorsButton.addEventListener("click", scissorsSelection);
+
       const result = playRound(playerSelection, computerSelection);
 
-      console.log(`Round ${i + 1}: ${result}`);
+      // console.log(`Round ${i + 1}: ${result}`);
 
 // adding scores
       if(result === "Player won!") {
@@ -67,7 +92,7 @@ function game() {
       }else if(result === "Computer won!") {
         computerScore++;
       }
-    }
+    // }
 
 // compare the scores at the end of all 5 Rounds
     if(playerScore > computerScore) {
