@@ -6,31 +6,45 @@ function getComputerChoice(){
 
     return choice[random];
 }
+const rockButton = document.querySelector("#rock");
+rockButton.addEventListener("click", compareFunction);
+
+function compareFunction(){
+  document.querySelector("#test").textContent="rock";
+};
 // compare choices
-function playRound(playerSelection, computerSelection) {
-  const rules = {
-  "rock": {
-  "rock": "Draw!",
-  "paper": "Computer won!",
-  "scissors": "Player won!"
-  },
-  "paper": {
-  "rock": "Player won!",
-  "paper": "Draw!",
-  "scissors": "Computer won!"
-  },
-  "scissors": {
-  "rock": "Computer won!",
-  "paper": "Player won!",
-  "scissors": "Draw!"
+function playRound(playerSelection, computerSelection){
+
+  const draw =(
+          (computerSelection == "Rock") & (playerSelection.toLowerCase() == "rock") || 
+          (computerSelection == "Paper") & (playerSelection.toLowerCase() == "paper") ||
+          (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "scissors")
+              )
+
+  const playerWon = (
+          (computerSelection == "Rock") & (playerSelection.toLowerCase() == "paper") || 
+          (computerSelection == "Paper") & (playerSelection.toLowerCase() == "scissors") ||
+          (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "rock")
+              )
+
+  const computerWon = (
+          (computerSelection == "Rock") & (playerSelection.toLowerCase() == "scissors") || 
+          (computerSelection == "Paper") & (playerSelection.toLowerCase() == "rock") ||
+          (computerSelection == "Scissors") & (playerSelection.toLowerCase() == "paper")
+              )
+
+// checking the choices and returning string
+  if(draw){
+      return ("Draw!");
+  }else if(playerWon){
+      return ("Player won!");
+  }else if(computerWon){
+      return("Computer won!");
+  }else{
+      return ("Just Rock, Paper, Scissors; Nothing Else!");
   }
-  };
-  
-  playerSelection = playerSelection.toLowerCase();
-  const result = rules[playerSelection][computerSelection.toLowerCase()];
-  
-  return result ? result : "Just Rock, Paper, Scissors; Nothing Else!";
-  }
+
+}
 
 // play 5 Rounds
 function game() {
@@ -38,10 +52,11 @@ function game() {
     let playerScore = 0;
     let computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 1; i++) {
 
       const computerSelection = getComputerChoice();
-      const playerSelection = prompt("Enter rock, paper, or scissors:");
+      const playerSelection = "rock";
+      // const playerSelection = prompt("Enter rock, paper, or scissors:");
       const result = playRound(playerSelection, computerSelection);
 
       console.log(`Round ${i + 1}: ${result}`);
