@@ -1,48 +1,71 @@
 const rockButton = document.querySelector("#rock");
 const paperButton = document.querySelector("#paper");
 const scissorsButton = document.querySelector("#scissors");
-      rockButton.addEventListener("click", getPlayerSelection);
-      paperButton.addEventListener("click",getPlayerSelection);
-      scissorsButton.addEventListener("click",getPlayerSelection);
 
-let playerSelection = "";
+const resetButton = document.querySelector("#reset");
 
+  rockButton.addEventListener("click", getPlayerSelection);
+  paperButton.addEventListener("click",getPlayerSelection);
+  scissorsButton.addEventListener("click",getPlayerSelection);
+  
+  resetButton.addEventListener("click", startOver);
+
+function startOver(){
+  location.reload()
+}
+
+let playerScore = 0;
+let computerScore = 0;
+let round = 0;
 
 // computer randomly returns 1 of 3 options
 function getComputerChoice(){
-
   const choice = ["Rock", "Paper", "Scissors"];
   const random = Math.floor(Math.random() * choice.length);   
 
   return choice[random];
 };
-const computerSelection = getComputerChoice();
-console.log(computerSelection);
 
 // player selects
 function getPlayerSelection(event) {
+  const computerSelection = getComputerChoice();
+  // console.log(`Computer: ${computerSelection}`);
+
+  let logElement = document.getElementById("log");
+  logElement.innerHTML += `Computer: ${computerSelection}<br>`;
+
   if(event.target.id === "rock"){
-    console.log("Rock Button Pressed")
     playerSelection = "rock";
-    playRound(playerSelection, computerSelection)
+    // console.log(`Player: ${playerSelection}`);
+    logElement.innerHTML += `Player: ${playerSelection}<br>`;
+
+    playRound(playerSelection, computerSelection);
+
   }else if(event.target.id === "paper"){
-    console.log("Paper Button Pressed")
     playerSelection = "paper";
-    playRound(playerSelection, computerSelection)
+    // console.log(`Player: ${playerSelection}`);
+    logElement.innerHTML += `Player: ${playerSelection}<br>`;
+
+    playRound(playerSelection, computerSelection);
+
   }else if(event.target.id === "scissors"){
-    console.log("Scissors Button Pressed")
     playerSelection = "scissors";
-    playRound(playerSelection, computerSelection)
+    // console.log(`Player: ${playerSelection}`);
+    logElement.innerHTML += `Player: ${playerSelection}<br>`;
+
+    playRound(playerSelection, computerSelection);
+
   }else{
-    console.log("Something went wrong")
+    // console.log("Something went wrong")
+    logElement.innerHTML += `Something went wrong!!!`;
   }
-  };
-  console.log(playerSelection);
+};
 
-
-// compare choices
+// compare and checking the choices, adding scores and counting the rounds
 function playRound(playerSelection, computerSelection){
+  let logElement = document.getElementById("log");
 
+  // compare choices
   const draw =(
           (computerSelection == "Rock") & (playerSelection == "rock") || 
           (computerSelection == "Paper") & (playerSelection == "paper") ||
@@ -61,63 +84,58 @@ function playRound(playerSelection, computerSelection){
           (computerSelection == "Scissors") & (playerSelection == "paper")
               )
 
-// checking the choices and returning string
+// checking the choices, adding scores and returning string
   if(draw){
-      console.log ("Draw!");
+      // console.log ("Draw!");
+      ++round;
+      logElement.innerHTML += `Draw in the ${round} round!<br><hr>`;
+
   }else if(playerWon){
-    console.log ("Player won!");
+    // console.log ("Player won!");
+    ++playerScore;
+    ++round;
+    logElement.innerHTML += `Player won!<br>Player got ${playerScore} Points in the ${round} round!<hr>`;
+    // console.log(playerScore);
   }else if(computerWon){
-    console.log("Computer won!");
+    // console.log("Computer won!");
+    ++computerScore;
+    ++round;
+    logElement.innerHTML += `Computer won!<br>Computer got ${computerScore} Points in the ${round} round!<hr>`;
+    // console.log(computerScore);
   }else{
-    console.log ("Just Rock, Paper, Scissors; Nothing Else!");
+    // console.log ("Just Rock, Paper, Scissors; Nothing Else!");
+    logElement.innerHTML += `Just Rock, Paper, Scissors; Nothing Else!<br><hr>`
+
+// play 5 rounds then start over
+  }
+  if(playerScore === 5){
+    // console.log("Player won 5 Rounds")
+    logElement.innerHTML += `PLAYER WON 5 ROUNDS!!!<br><hr><hr>`;
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+  }else if(computerScore === 5){
+    // console.log("Computer won 5 Rounds")
+    logElement.innerHTML += `COMPUTER WON 5 ROUNDS!!!<br><hr><hr>`;
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
   }
 
 }
 
 
-// function playerChoice(){
-//   let playerSelection = document.querySelector("#playerSelection");
-//   playerSelection="";
-
-//   const paperButton = document.querySelector("#paper");
-//   const rockButton = document.querySelector("#rock");
-//   const scissorsButton = document.querySelector("#scissors");
-  
-//   paperButton.addEventListener("click", ()=>{playerSelection.textContent="paper"});
-  
-//   rockButton.addEventListener("click", ()=>{playerSelection.textContent="rock"});
- 
-//   scissorsButton.addEventListener("click", ()=>{playerSelection.textContent="scissors"});
-  
-//   if(playerSelection.textContent="rock"){
-//     return playerSelection="Rock";
-//   }else if(playerSelection.textContent="paper"){
-//     return playerSelection="Paper";
-//   }else if(playerSelection.textContent="scissors"){
-//     return playerSelection="Scissors";
-//   }else{
-//     return "Some"
-//   }
-
-  // return playerSelection;
-// }
-// console.log(playerChoice());
 
 
-
-
-// play 5 Rounds
+// // play 5 Rounds
 // function game() {
 // // score basis at the beginning
 //     let playerScore = 0;
 //     let computerScore = 0;
 
 //     for (let i = 0; i < 5; i++) {
-
-//       const computerSelection = getComputerChoice();
-//       console.log(computerSelection);
-//       const playerSelection = "rock";
-//       console.log(playerSelection);
+// let playerSelection="";
+// let computerSelection="";
 //       const result = playRound(playerSelection, computerSelection);
 
 //       console.log(`Round ${i + 1}: ${result}`);
@@ -142,5 +160,4 @@ function playRound(playerSelection, computerSelection){
 //     }
 //   }
 // }
-  // game();
- 
+//   game();
