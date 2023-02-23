@@ -4,6 +4,10 @@ const scissorsButton = document.querySelector("#scissors");
 
 const resetButton = document.querySelector("#reset");
 
+let computerLogElement = document.querySelector("#computerText");
+let playerLogElement = document.querySelector("#playerText");
+let resultLogElement = document.querySelector("#result")
+
   rockButton.addEventListener("click", getPlayerSelection);
   paperButton.addEventListener("click",getPlayerSelection);
   scissorsButton.addEventListener("click",getPlayerSelection);
@@ -31,92 +35,90 @@ function getPlayerSelection(event) {
   const computerSelection = getComputerChoice();
   // console.log(`Computer: ${computerSelection}`);
 
-  let logElement = document.getElementById("log");
-  logElement.innerHTML += `Computer: ${computerSelection}<br>`;
+  computerLogElement.innerHTML = `Computer: ${computerSelection}<br>`;
 
   if(event.target.id === "rock"){
-    playerSelection = "rock";
+    playerSelection = "Rock";
     // console.log(`Player: ${playerSelection}`);
-    logElement.innerHTML += `Player: ${playerSelection}<br>`;
+    playerLogElement.innerHTML = `Player: ${playerSelection}<br>`;
 
     playRound(playerSelection, computerSelection);
 
   }else if(event.target.id === "paper"){
-    playerSelection = "paper";
+    playerSelection = "Paper";
     // console.log(`Player: ${playerSelection}`);
-    logElement.innerHTML += `Player: ${playerSelection}<br>`;
+    playerLogElement.innerHTML = `Player: ${playerSelection}<br>`;
 
     playRound(playerSelection, computerSelection);
 
   }else if(event.target.id === "scissors"){
-    playerSelection = "scissors";
+    playerSelection = "Scissors";
     // console.log(`Player: ${playerSelection}`);
-    logElement.innerHTML += `Player: ${playerSelection}<br>`;
+    playerLogElement.innerHTML = `Player: ${playerSelection}<br>`;
 
     playRound(playerSelection, computerSelection);
 
   }else{
     // console.log("Something went wrong")
-    logElement.innerHTML += `Something went wrong!!!`;
+    logElement.innerHTML = `Something went wrong!!!`;
   }
 };
 
 // compare and checking the choices, adding scores and counting the rounds
 function playRound(playerSelection, computerSelection){
-  let logElement = document.getElementById("log");
 
   // compare choices
   const draw =(
-          (computerSelection == "Rock") & (playerSelection == "rock") || 
-          (computerSelection == "Paper") & (playerSelection == "paper") ||
-          (computerSelection == "Scissors") & (playerSelection == "scissors")
+          (computerSelection == "Rock") & (playerSelection == "Rock") || 
+          (computerSelection == "Paper") & (playerSelection == "Paper") ||
+          (computerSelection == "Scissors") & (playerSelection == "Scissors")
               )
 
   const playerWon = (
-          (computerSelection == "Rock") & (playerSelection == "paper") || 
-          (computerSelection == "Paper") & (playerSelection == "scissors") ||
-          (computerSelection == "Scissors") & (playerSelection == "rock")
+          (computerSelection == "Rock") & (playerSelection == "Paper") || 
+          (computerSelection == "Paper") & (playerSelection == "Scissors") ||
+          (computerSelection == "Scissors") & (playerSelection == "Rock")
               )
 
   const computerWon = (
-          (computerSelection == "Rock") & (playerSelection == "scissors") || 
-          (computerSelection == "Paper") & (playerSelection == "rock") ||
-          (computerSelection == "Scissors") & (playerSelection == "paper")
+          (computerSelection == "Rock") & (playerSelection == "Scissors") || 
+          (computerSelection == "Paper") & (playerSelection == "Rock") ||
+          (computerSelection == "Scissors") & (playerSelection == "Paper")
               )
 
 // checking the choices, adding scores and returning string
   if(draw){
       // console.log ("Draw!");
       ++round;
-      logElement.innerHTML += `Draw in the ${round} round!<br><hr>`;
+      resultLogElement.innerHTML = `Draw in the ${round} round!<br>`;
 
   }else if(playerWon){
     // console.log ("Player won!");
     ++playerScore;
     ++round;
-    logElement.innerHTML += `Player won!<br>Player got ${playerScore} Points in the ${round} round!<hr>`;
+    resultLogElement.innerHTML = `Player got ${playerScore} Points in the ${round} round!`;
     // console.log(playerScore);
   }else if(computerWon){
     // console.log("Computer won!");
     ++computerScore;
     ++round;
-    logElement.innerHTML += `Computer won!<br>Computer got ${computerScore} Points in the ${round} round!<hr>`;
+    resultLogElement.innerHTML = `Computer got ${computerScore} points in the ${round} round!`;
     // console.log(computerScore);
   }else{
     // console.log ("Just Rock, Paper, Scissors; Nothing Else!");
-    logElement.innerHTML += `Just Rock, Paper, Scissors; Nothing Else!<br><hr>`
+    resultLogElement.innerHTML = `Just Rock, Paper, Scissors; Nothing Else!<br>`
 
 // play 5 rounds then start over
   }
   if(playerScore === 5){
     // console.log("Player won 5 Rounds")
-    logElement.innerHTML += `PLAYER WON 5 ROUNDS!!!<br><hr><hr>`;
+    resultLogElement.innerHTML = `PLAYER WON 5 ROUNDS!!!<br>With ${playerScore} points against ${computerScore} points.`;
     playerScore = 0;
     computerScore = 0;
     round = 0;
   }else if(computerScore === 5){
     // console.log("Computer won 5 Rounds")
-    logElement.innerHTML += `COMPUTER WON 5 ROUNDS!!!<br><hr><hr>`;
+    resultLogElement.innerHTML = `COMPUTER WON 5 ROUNDS!!!<br>With ${computerScore} points against ${playerScore} points.`;
     playerScore = 0;
     computerScore = 0;
     round = 0;
